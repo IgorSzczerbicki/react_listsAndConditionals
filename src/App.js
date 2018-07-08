@@ -10,7 +10,8 @@ class App extends Component {
 			{name: 'Anna', age: 25},
 			{name: 'Marcin', age: 33}
 		],
-		curPerson: 0
+		curPerson: 0,
+		showPersons: false
 	};
 
 	switchNameHandler = (newName) => {
@@ -30,6 +31,10 @@ class App extends Component {
 		});
 	};
 
+	togglePersonHandler = () => {
+		this.setState({showPersons: !this.state.showPersons})
+	};
+
 	render() {
 		const btnStyle = {
 			backgroundColor: 'white',
@@ -44,33 +49,30 @@ class App extends Component {
 				<h1>React Start</h1>
 				<button
 					style = {btnStyle}
-					onClick={this.switchNameHandler.bind(this, "reset")}>Zmień imię
+					onClick={this.togglePersonHandler}>Zmień imię
 				</button>
-				{/*<button onClick={() => this.switchNameHandler(0)}>Zmień osobę</button>*/}
-				<Person
-					name={this.state.persons[0].name}
-					age = {this.state.persons[0].age}
-					click = {this.switchNameHandler}
-					changeName = {this.nameChangeHandler}>
-					Moje hobby: sport
-				</Person>
-				<Person
-					name={this.state.persons[1].name}
-					age = {this.state.persons[1].age}
-					click = {this.switchNameHandler}
-					changeName = {this.nameChangeHandler}>
-				</Person>
-				<Person
-					name={this.state.persons[2].name}
-					age = {this.state.persons[2].age}
-					click = {this.switchNameHandler}
-					changeName = {this.nameChangeHandler}>
-				</Person>
+				{this.state.showPersons ? <div>
+					<Person
+						name={this.state.persons[0].name}
+						age = {this.state.persons[0].age}
+						click = {this.switchNameHandler}
+						changeName = {this.nameChangeHandler}>
+						Moje hobby: sport
+					</Person>
+					<Person
+						name={this.state.persons[1].name}
+						age = {this.state.persons[1].age}
+						click = {this.switchNameHandler}
+						changeName = {this.nameChangeHandler}>
+					</Person>
+					<Person
+						name={this.state.persons[2].name}
+						age = {this.state.persons[2].age}
+						click = {this.switchNameHandler}
+						changeName = {this.nameChangeHandler}>
+					</Person>
+				</div> : null}
 			</div>
-
-			// równoważny zapis
-			//
-			// React.createElement('div', null, React.createElement('h1', {className:"App"}, 'React Start Element'))
 		);
 	}
 }
